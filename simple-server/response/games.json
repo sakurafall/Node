@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "The Witcher 3: Wild Hunt",
+    "description": "A story-driven, open world RPG set in a visually stunning fantasy universe.",
+    "genre": "Action RPG",
+    "rating": 9.5
+  },
+  {
+    "id": 2,
+    "name": "The Witcher 3: Wild Hunt",
+    "description": "A story-driven, open world RPG set in a visually stunning fantasy universe.",
+    "genre": "Action RPG",
+    "rating": 9.5
+  },
+  {
+    "id": 3,
+    "name": "The Witcher 3: Wild Hunt",
+    "description": "A story-driven, open world RPG set in a visually stunning fantasy universe.",
+    "genre": "Action RPG",
+    "rating": 9.5
+  }
+]
