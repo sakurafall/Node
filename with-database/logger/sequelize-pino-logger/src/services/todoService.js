@@ -49,7 +49,9 @@ export async function getTodoById(todoId) {
 }
 
 export async function deleteTodoById(todoId) {
-  await Todo.destroy({ where: { id: todoId }})
+  const deletedTodoNumber = await Todo.destroy({ where: { id: todoId }})
+
+  return deletedTodoNumber
 }
 
 export async function createTodo(addTodo) {
@@ -59,7 +61,7 @@ export async function createTodo(addTodo) {
 }
 
 export async function updateTodo(updateTodo) {
-  await Todo.update(
+  const updatedTodoEffect = await Todo.update(
     updateTodo,
     {
       where: {
@@ -67,4 +69,6 @@ export async function updateTodo(updateTodo) {
       }
     }
   )
+
+  return updatedTodoEffect[0]
 }

@@ -1,4 +1,5 @@
 import { Sequelize } from 'sequelize';
+import { logger } from './loggerHelper.js';
 
 // function buildDialectOptions() {
 //   if (process.env.DB_SSL === 'false') {
@@ -39,11 +40,12 @@ const sequelize = new Sequelize(databaseConfig.database, databaseConfig.username
   logging: false
 })
 
-// try {
-//   await sequelize.authenticate();
-//   console.log('Connection has been established successfully.');
-// } catch (error) {
-//   console.error('Unable to connect to the database:', error);
-// }
+try {
+  await sequelize.authenticate();
+  logger.info('Connection has been established successfully.');
+} catch (error) {
+  logger.error(`Unable to connect to the database: ${error}`);
+  throw error
+}
 
 export default sequelize;

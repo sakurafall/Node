@@ -7,7 +7,8 @@
   "scripts": {
     "dev": "dotenvx run -- nodemon ./src/server.js | pino-pretty",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "seed": "dotenvx run -- nodemon ./src/scripts/seed.js"
+    "seed": "dotenvx run -- nodemon ./src/scripts/seed.js",
+    "deps:graph": "set \"PATH=C:\\Program Files\\Graphviz\\bin;%PATH%\" && madge --image graph.png ./src/server.js"
   },
   "keywords": [],
   "author": "",
