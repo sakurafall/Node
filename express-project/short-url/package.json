@@ -1,0 +1,27 @@
+{
+  "name": "short-url",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev:database-connection": "dotenvx run -- node ./src/utils/dbhelper.js",
+    "dev": "dotenvx run -- nodemon ./src/server.js",
+    "seed": "dotenvx run -- node ./src/scripts/seed.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.33.0",
+  "dependencies": {
+    "@dotenvx/dotenvx": "^1.65.0",
+    "cors": "^2.8.6",
+    "crypto-random-string": "^5.0.0",
+    "express": "^5.2.1",
+    "pg": "^8.20.0",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.37.8",
+    "validator": "^13.15.35"
+  }
+}

@@ -15,7 +15,8 @@ export async function createUser(email, password) {
 
 export async function verifyUser(email, password) {
   const user = await User.findOne({ where: { email } });
-  const result = await bcrypt.compare(password, user.password);
-
-  return result;
+  if (!user) return null;
+  
+  const matched = await bcrypt.compare(password, user.password);
+  return matched ? user : null;
 }

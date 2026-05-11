@@ -1,6 +1,7 @@
 import AppError from '../utils/AppError.js';
-import { createUser as createUserApi, verifyUser as verifyUserApi } from '../services/userServer.js';
+import { createUser as createUserApi, verifyUser as verifyUserApi } from '../services/userService.js';
 import { sendSuccessResponse } from '../utils/responseHelper.js';
+import { generateToken } from '../utils/jwtHelper.js';
 
 // signup controller
 export async function createUser(req, res) {
@@ -15,7 +16,7 @@ export async function createUser(req, res) {
 }
 
 // login controller
-export async function login(req, res) {
+export async function login(req, res, _next) {
   const { email, password } = req.body;
 
   if (!email || !password) {
@@ -30,5 +31,7 @@ export async function login(req, res) {
     });
   }
 
-  return sendSuccessResponse(res, result);
+  const token = await generateToken({ email });
+
+  return sendSuccessResponse(res, token);
 }

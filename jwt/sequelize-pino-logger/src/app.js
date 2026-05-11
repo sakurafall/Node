@@ -2,13 +2,12 @@ import express from "express";
 import cors from "cors";
 // import morgan from 'morgan'
 
+import limiter from "./utils/rateLimiter.js";
+import { pinoHttpMiddleware } from "./utils/loggerHelper.js";
+import globalErrorHandler from "./utils/globalErrorHandler.js";
 
 import TodosRouter from "./routes/todoRoute.js";
 import UserRouter from "./routes/userRoute.js";
-
-import limiter from "./utils/rateLimiter.js";
-import { pinoHttpMiddleware } from "./utils/loggerHelper.js";
-import globalErrorHandler from "./utils/globalErrorHandle.js";
 
 // Create express instance
 const app = express();
@@ -38,8 +37,8 @@ app.use(limiter);
 // 	next()
 // })
 
-app.use("", TodosRouter);
 app.use("", UserRouter);
+app.use("", TodosRouter);
 // global error handler
 app.use(globalErrorHandler);
 
