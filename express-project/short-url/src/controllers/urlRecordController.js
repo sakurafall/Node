@@ -1,6 +1,6 @@
 import validator from 'validator';
-import URLRecord from '../models/urlRecord.js';
-import { generateShortURL } from '../utils/urlhelper.js';
+import URLRecord from '../models/urlRecordModel.js';
+import { generateShortURL } from '../utils/urlHelper.js';
 
 export async function createURLRecord(req, res) {
   const { originURL, urlCode } = req.body;

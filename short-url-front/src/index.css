@@ -1,0 +1,123 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Italian minimalist palette · warm off-white background, deep ink, terracotta accent */
+    --background: 36 30% 96%;
+    --foreground: 30 8% 12%;
+
+    --card: 36 30% 98%;
+    --card-foreground: 30 8% 12%;
+
+    --popover: 36 30% 98%;
+    --popover-foreground: 30 8% 12%;
+
+    --primary: 30 8% 12%;
+    --primary-foreground: 36 30% 96%;
+
+    --secondary: 30 12% 92%;
+    --secondary-foreground: 30 8% 18%;
+
+    --muted: 30 12% 92%;
+    --muted-foreground: 30 6% 42%;
+
+    --accent: 30 12% 90%;
+    --accent-foreground: 30 8% 12%;
+
+    --destructive: 4 62% 50%;
+    --destructive-foreground: 36 30% 98%;
+
+    --border: 30 10% 86%;
+    --input: 30 10% 86%;
+    --ring: 30 8% 24%;
+
+    --terracotta: 18 56% 48%;
+
+    --radius: 0.25rem;
+  }
+
+  .dark {
+    --background: 30 8% 8%;
+    --foreground: 36 24% 92%;
+    --card: 30 8% 10%;
+    --card-foreground: 36 24% 92%;
+    --popover: 30 8% 10%;
+    --popover-foreground: 36 24% 92%;
+    --primary: 36 24% 92%;
+    --primary-foreground: 30 8% 8%;
+    --secondary: 30 6% 16%;
+    --secondary-foreground: 36 24% 92%;
+    --muted: 30 6% 16%;
+    --muted-foreground: 30 6% 64%;
+    --accent: 30 6% 18%;
+    --accent-foreground: 36 24% 92%;
+    --destructive: 4 62% 50%;
+    --destructive-foreground: 36 24% 92%;
+    --border: 30 6% 20%;
+    --input: 30 6% 20%;
+    --ring: 36 24% 80%;
+    --terracotta: 18 56% 56%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: 'ss01', 'cv11', 'kern';
+    font-variant-ligatures: common-ligatures;
+    background-image:
+      radial-gradient(
+        circle at 12% 8%,
+        hsl(var(--terracotta) / 0.04),
+        transparent 38%
+      ),
+      radial-gradient(
+        circle at 92% 92%,
+        hsl(var(--primary) / 0.04),
+        transparent 42%
+      );
+    background-attachment: fixed;
+  }
+
+  ::selection {
+    background: hsl(var(--terracotta) / 0.25);
+    color: hsl(var(--foreground));
+  }
+}
+
+@layer utilities {
+  .text-serif {
+    font-family: theme('fontFamily.serif');
+  }
+
+  .text-mono {
+    font-family: theme('fontFamily.mono');
+  }
+
+  .hairline {
+    border-color: hsl(var(--border));
+    border-width: 1px;
+  }
+
+  .hairline-b {
+    border-bottom: 1px solid hsl(var(--border));
+  }
+
+  .hairline-t {
+    border-top: 1px solid hsl(var(--border));
+  }
+
+  .terracotta {
+    color: hsl(var(--terracotta));
+  }
+}

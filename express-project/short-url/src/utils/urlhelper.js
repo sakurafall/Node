@@ -1,5 +1,5 @@
 import cryptoRandomString from 'crypto-random-string';
-import URLRecord from '../models/urlRecordModel';
+import URLRecord from '../models/urlRecordModel.js';
 
 const PROJECT_URL = process.env.PROJECT_URL;
 const SHORT_URL_LENGTH = Number(process.env.SHORT_URL_LENGTH);

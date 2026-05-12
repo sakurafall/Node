@@ -1,5 +1,5 @@
 import { DataTypes } from 'sequelize';
-import sequelize from '../utils/dbhelper.js';
+import sequelize from '../utils/dbHelper.js';
 
 const URLRecord = sequelize.define(
   'URLRecord',
