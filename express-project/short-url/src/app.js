@@ -11,7 +11,9 @@ const app = express();
 // TODO: Auth
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: process.env.PROJECT_URL,
+}));
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // TODO: Rate limiter
