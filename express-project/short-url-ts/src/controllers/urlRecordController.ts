@@ -1,60 +1,75 @@
-import validator from 'validator';
-import URLRecord from '../models/urlRecordModel.js';
-import { generateShortURL } from '../utils/urlHelper.js';
+import validator from "validator";
+import { generateShortURL } from "../utils/url.helper.ts";
+import {
+  getURLRecordByURLCode,
+  getURLRecordByOriginURL,
+  createURLRecord as createURLRecordService,
+} from "../services/urlRecordService.ts";
+import type { Request, Response } from "express";
+import type { URLRecordResponse } from "../types/Response.ts";
 
-export async function createURLRecord(req, res) {
+interface CreateURLRecordRequest extends Request {
+  body: {
+    originURL: string;
+    urlCode?: string;
+  }
+}
+
+export async function createURLRecord(req: CreateURLRecordRequest, res: Response<URLRecordResponse>) {
   const { originURL, urlCode } = req.body;
 
   // If originURL is not provided
   if (!originURL) {
-    return res.status(400).json({ message: 'Origin URL is required' });
+    return res.status(400).json({ message: "Origin URL is required" });
   }
 
   // If originURL is not a valid URL
   if (!validator.isURL(originURL)) {
-    return res.status(400).json({ message: 'Invalid origin URL' });
+    return res.status(400).json({ message: "Invalid origin URL" });
   }
 
-  const urlRecord = await URLRecord.findOne({ where: { originURL } });
+  const urlRecord = await getURLRecordByOriginURL(originURL);
   if (urlRecord) {
-    return res.status(200).json({ message: 'Origin URL already exists', data: urlRecord });
+    return res
+      .status(200)
+      .json({ message: "Origin URL already exists", data: urlRecord });
   }
 
   // If urlCode is provided
   if (urlCode) {
-    const urlRecord = await URLRecord.findOne({ where: { urlCode } });
+    const urlRecord = await getURLRecordByURLCode(urlCode);
 
     // If urlCode already exists
     if (urlRecord) {
-      return res.status(400).json({ message: 'URL code already exists' });
+      return res.status(400).json({ message: "URL code already exists" });
     }
 
     // If urlCode is not provided, generate a short URL and create a new URL record
     const shortURL = await generateShortURL(urlCode);
-    const createdURLRecord = await URLRecord.create({
-      id: Date.now(),
+
+    const createdURLRecord = await createURLRecordService(
       originURL,
       shortURL,
       urlCode,
-    });
+    );
 
     return res.status(201).json({
-      message: 'URL record created successfully',
+      message: "URL record created successfully",
       data: createdURLRecord,
     });
   }
 
   // If urlCode is not provided, generate a short URL and create a new URL record
   const shortURL = await generateShortURL();
-  const createdURLRecord = await URLRecord.create({
-    id: Date.now(),
+
+  const createdURLRecord = await createURLRecordService(
     originURL,
     shortURL,
-    urlCode: shortURL.split('/').at(-1),
-  });
+    shortURL.split("/").at(-1)!,
+  );
 
   return res.status(201).json({
-    message: 'URL record created successfully',
+    message: "URL record created successfully",
     data: createdURLRecord,
   });
 }
